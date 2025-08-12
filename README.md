@@ -1,4 +1,5 @@
-# 📦 WHAT’S IN THE BOX ?!?!?!?!?
+
+# 📦 WHAT’S IN THE BOX?
 **Tagline:** *"In case of crash, break groove — and read me first."*
 
 ```mathematica
@@ -44,14 +45,18 @@ Keep things organized and labeled — future you will thank you.
 
 If it saves your butt, it belongs in here.
 
+### 🖥 Script Index
+A quick guide to the scripts stored in this box.
+
 🖥 Script Index
 A quick guide to the scripts stored in this box.
 
-Script Name	Purpose / Description	Location
+Script Name	                Purpose / Description	                   Location
 system-check.sh	Runs a full health check on the dev environment	/emergency-scripts
-env-setup.sh	Sets up environment variables for new installs	/dev-helpers
+env-setup.sh	   Sets up environment variables for new installs	/dev-helpers
 backup-vault.sh	Creates a compressed backup of key project files	/emergency-scripts
-
-(Add more rows as new scripts get added)
+script-name.ext	Short description of what it does	/folder-name
+---
+That last line in the Script Index is your **permanent blank row** — just fill in the three parts when you add a script and keep the pipes (`|`) in place so the table stays pretty.  
 
 <!-- Easter Egg: "WHAT'S IN THE BOX?!" — Det. Mills (whispers: check /emergency-scripts first) --> <!-- Easter Egg: "You wouldn't like me when I'm angry." — Dr. David Banner -->
