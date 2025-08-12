@@ -1,0 +1,56 @@
+# DevProjects Main .gitignore
+
+# Backup folders
+backups/
+*.backup
+*.bak
+
+# OS Files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDE Files
+.vscode/
+.idea/
+*.sublime-workspace
+*.code-workspace
+
+# Temporary files
+*.tmp
+*.temp
+.temp/
+tmp/
+
+# Logs
+*.log
+logs/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Credentials
+*.key
+*.pem
+*.cert
+credentials/
+
+# Build outputs (will be handled per-project)
+# Uncomment if you want to ignore all build outputs globally
+# dist/
+# build/
+# out/
+
+# Dependencies (will be handled per-project)
+# Uncomment if you want to ignore all dependencies globally
+# node_modules/
+# venv/
+# env/
+
+# AI-related
+*.ai-temp
+.ai-cache/
+
+# Project-specific overrides can be added in individual project .gitignore files
