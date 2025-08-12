@@ -1,4 +1,4 @@
-# 📦 WHAT’S IN THE BOX?
+# 📦 WHAT’S IN THE BOX ?!?!?!?!?
 **Tagline:** *"In case of crash, break groove — and read me first."*
 
 ```mathematica
