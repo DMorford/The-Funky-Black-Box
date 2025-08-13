@@ -1,0 +1,37 @@
+#!/usr/bin/env pwsh
+# pre-commit hook for The Funky Black Box
+
+$ErrorActionPreference = 'Stop'
+
+# Load configuration module
+Import-Module "$PSScriptRoot/../../_config/ConfigurationModule.psm1" -Force
+
+# Run configuration validation
+Write-Host "🔍 Validating configuration..." -ForegroundColor Cyan
+$configResult = & "$PSScriptRoot/../../_config/Validate-Configuration.ps1"
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "❌ Configuration validation failed!" -ForegroundColor Red
+    exit 1
+}
+
+# Check for hardcoded paths
+Write-Host "🔍 Checking for hardcoded paths..." -ForegroundColor Cyan
+$hardcodedPaths = git ls-files -z | ForEach-Object { 
+    $file = $_
+    if (Select-String -Path $file -Pattern '([A-Za-z]:\\|/usr/|/home/)' -Quiet) {
+        # Exclude allowed files
+        if ($file -notmatch '(_config/config\.example\.json|\.env\..*\.example)$') {
+            $file
+        }
+    }
+}
+
+if ($hardcodedPaths) {
+    Write-Host "❌ Found hardcoded paths in:" -ForegroundColor Red
+    $hardcodedPaths | ForEach-Object { Write-Host "  - $_" -ForegroundColor Red }
+    exit 1
+}
+
+# All checks passed
+Write-Host "✅ Pre-commit checks passed!" -ForegroundColor Green
+exit 0
