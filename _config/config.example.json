@@ -1,0 +1,32 @@
+{
+    "workspace": {
+        "basePath": "${DEVPROJECTS_ROOT}",
+        "paths": {
+            "templates": "${DEVPROJECTS_ROOT}/_templates",
+            "scripts": "${DEVPROJECTS_ROOT}/_scripts",
+            "config": "${DEVPROJECTS_ROOT}/_config",
+            "active": "${DEVPROJECTS_ROOT}/active",
+            "archived": "${DEVPROJECTS_ROOT}/archived",
+            "backups": "${DEVPROJECTS_ROOT}/backups",
+            "sandbox": "${DEVPROJECTS_ROOT}/sandbox"
+        }
+    },
+    "security": {
+        "allowedProjectTypes": ["python", "javascript", "typescript"],
+        "requiredEnvVars": [
+            "DEVPROJECTS_ROOT",
+            "GITHUB_TOKEN",
+            "NODE_ENV"
+        ],
+        "backupRetentionDays": 30,
+        "maxBackupSize": "1GB"
+    },
+    "git": {
+        "defaultBranch": "main",
+        "requiredFiles": [
+            ".gitignore",
+            "README.md",
+            "CONTRIBUTING.md"
+        ]
+    }
+}

@@ -1,6 +1,7 @@
 # Project Status Update Script
 # Updates the PROJECT_STATUS.md dashboard
 
+[CmdletBinding()]
 param(
     [Parameter()]
     [string]$ProjectName,
@@ -15,8 +16,23 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-$BasePath = "C:\Users\morfo\DevProjects"
-$StatusFile = Join-Path $BasePath "PROJECT_STATUS.md"
+# Import and initialize configuration
+Import-Module "$PSScriptRoot/../_config/ConfigurationModule.psm1" -Force
+Initialize-FunkyConfig
+
+# Get typed configuration
+$config = Get-FunkyConfig
+
+# Get status file path
+$StatusFile = Join-Path $config.Paths.Root "PROJECT_STATUS.md"
+
+# Validate environment
+$envIssues = Test-FunkyEnvironment
+if ($envIssues.Count -gt 0) {
+    Write-Host "❌ Environment validation failed:" -ForegroundColor Red
+    $envIssues | ForEach-Object { Write-Host "  - $_" -ForegroundColor Red }
+    exit 1
+}
 
 function Show-ProjectStatus {
     Write-Host "`nCurrent Project Status:" -ForegroundColor Cyan

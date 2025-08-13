@@ -1,12 +1,12 @@
 # New Project Creation Script
 # Creates a new project with proper structure and templates
 
+[CmdletBinding()]
 param(
     [Parameter(Mandatory=$true)]
     [string]$Name,
     
     [Parameter(Mandatory=$true)]
-    [ValidateSet("python", "javascript", "typescript", "generic")]
     [string]$Type,
     
     [Parameter()]
@@ -19,10 +19,22 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-# Define base paths
-$BasePath = "C:\Users\morfo\DevProjects"
-$ProjectPath = Join-Path $BasePath $Category $Name
-$TemplatesPath = Join-Path $BasePath "_templates"
+# Import and initialize configuration
+Import-Module "$PSScriptRoot/../_config/ConfigurationModule.psm1" -Force
+Initialize-FunkyConfig
+
+# Get typed configuration
+$config = Get-FunkyConfig
+
+# Validate project type
+if ($Type -notin $config.Security.AllowedProjectTypes) {
+    Write-Host "Invalid project type. Allowed types: $($config.Security.AllowedProjectTypes -join ', ')" -ForegroundColor Red
+    exit 1
+}
+
+# Get paths from configuration
+$ProjectPath = Join-Path $config.Paths.Root $Category $Name
+$TemplatesPath = $config.Paths.Templates
 
 Write-Host "Creating new $Type project: $Name" -ForegroundColor Green
 
