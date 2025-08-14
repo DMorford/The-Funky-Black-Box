@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Looksy M3 - Startup Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e5e7eb;
+        }
+
+        .section-header {
+            padding: 1rem 1.5rem;
+            background: #f8fafc;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .section-header:hover {
+            background: #f1f5f9;
+        }
+
+        .section-header h2 {
+            font-size: 1.3rem;
+            color: #4f46e5;
+        }
+
+        .section-content {
+            padding: 1.5rem;
+            display: none;
+            background: white;
+        }
+
+        .section.active .section-content {
+            display: block;
+        }
+
+        .command-block {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin: 0.8rem 0;
+            border: 1px solid #e5e7eb;
+        }
+
+        .command-block h3 {
+            color: #4f46e5;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .command {
+            font-family: 'Consolas', 'Courier New', monospace;
+            color: #0f766e;
+            padding: 0.8rem 1rem;
+            background: white;
+            border-radius: 6px;
+            position: relative;
+            margin: 0.8rem 0;
+            white-space: pre-wrap;
+            word-break: break-all;
+            border: 1px solid #e5e7eb;
+            font-size: 0.95rem;
+        }
+
+        .command:hover {
+            background: #f8fafc;
+        }
+
+        .copy-btn {
+            position: absolute;
+            right: 0.8rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 0.3rem 0.8rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .command:hover .copy-btn {
+            opacity: 1;
+        }
+
+        .description {
+            color: #64748b;
+            margin: 0.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .tip {
+            background: #f0fdf4;
+            color: #166534;
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 0.8rem 0;
+            border: 1px solid #dcfce7;
+        }
+
+        .warning {
+            background: #fef2f2;
+            color: #991b1b;
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 0.8rem 0;
+            border: 1px solid #fee2e2;
+        }
+
+        .window-label {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: #ede9fe;
+            color: #5b21b6;
+            border-radius: 4px;
+            margin-right: 0.8rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .checklist {
+            list-style: none;
+            margin: 0.8rem 0;
+        }
+
+        .checklist li {
+            margin: 0.8rem 0;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .checklist li::before {
+            content: "✓";
+            color: #4f46e5;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .architecture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.2rem;
+            margin: 1.2rem 0;
+        }
+
+        .component {
+            background: white;
+            padding: 1.2rem;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .component h3 {
+            color: #4f46e5;
+            margin-bottom: 0.8rem;
+        }
+
+        .url-list {
+            display: grid;
+            gap: 0.8rem;
+        }
+
+        .url {
+            background: white;
+            padding: 0.8rem;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #e5e7eb;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+        }
+
+        /* Smooth animations */
+        .section-content {
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn {
+            transition: all 0.2s ease;
+        }
+
+        .copy-btn:hover {
+            background: #6366f1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Looksy M3 - Startup Guide</h1>
+            <p>Complete System Startup and Management</p>
+        </div>
+
+        <!-- System Architecture -->
+        <div class="section active">
+            <div class="section-header">
+                <h2>🏗️ System Architecture</h2>
+                <span>▼</span>
+            </div>
+            <div class="section-content">
+                <div class="architecture-grid">
+                    <div class="component">
+                        <h3>Docker Desktop</h3>
+                        <p>Container Runtime</p>
+                        <div class="tip">Runs MediaMTX + Redis</div>
+                    </div>
+                    <div class="component">
+                        <h3>Fastify (npm)</h3>
+                        <p>Web Server</p>
+                        <div class="tip">Serves web pages</div>
+                    </div>
+                    <div class="component">
+                        <h3>MediaMTX</h3>
+                        <p>Streaming Server</p>
+                        <div class="tip">Handles video streams</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Startup Sequence -->
+        <div class="section active">
+            <div class="section-header">
+                <h2>▶️ Startup Sequence</h2>
+                <span>▼</span>
+            </div>
+            <div class="section-content">
+                <div class="command-block">
+                    <h3>Step 1: Start Docker Desktop</h3>
+                    <div class="checklist">
+                        <li>Launch Docker Desktop</li>
+                        <li>Wait for steady whale icon</li>
+                        <li>Verify "Docker Desktop is running"</li>
+                    </div>
+                </div>
+
+                <div class="command-block">
+                    <h3>Step 2: Start Streaming Containers</h3>
+                    <span class="window-label">PowerShell #1</span>
+                    <div class="command">cd "C:\Users\morfo\Desktop\Looksy Project"<button class="copy-btn">Copy</button></div>
+                    <div class="command">docker-compose up -d<button class="copy-btn">Copy</button></div>
+                    <div class="tip">Wait 10 seconds, then verify:</div>
+                    <div class="command">docker ps<button class="copy-btn">Copy</button></div>
+                    <div class="description">Should show: looksy-mediamtx and looksy-redis</div>
+                </div>
+
+                <div class="command-block">
+                    <h3>Step 3: Start Web Server</h3>
+                    <span class="window-label">PowerShell #2</span>
+                    <div class="command">cd "C:\Users\morfo\Desktop\Looksy Project"<button class="copy-btn">Copy</button></div>
+                    <div class="command">npm run dev<button class="copy-btn">Copy</button></div>
+                    <div class="warning">Leave this window running!</div>
+                    <div class="description">Should see: "Server running at http://10.0.0.50:3000"</div>
+                </div>
+
+                <div class="command-block">
+                    <h3>Step 4: Create Test Video Stream</h3>
+                    <span class="window-label">PowerShell #3</span>
+                    <div class="command">docker exec looksy-mediamtx ffmpeg -re -f lavfi -i testsrc2=size=1280x720:rate=30 -f lavfi -i sine=frequency=1000 -t 300 -c:v libx264 -preset ultrafast -b:v 1M -c:a aac -f rtsp rtsp://localhost:8554/test<button class="copy-btn">Copy</button></div>
+                    <div class="warning">Runs for 5 minutes then stops</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test URLs -->
+        <div class="section">
+            <div class="section-header">
+                <h2>🔗 Test URLs</h2>
+                <span>▶</span>
+            </div>
+            <div class="section-content">
+                <div class="url-list">
+                    <div class="command">http://localhost:3000/gallery<button class="copy-btn">Copy</button></div>
+                    <div class="command">http://localhost:8888/test<button class="copy-btn">Copy</button></div>
+                    <div class="command">http://localhost:3000/webrtc-test.html<button class="copy-btn">Copy</button></div>
+                    <div class="command">http://localhost:3000/stream-test.html<button class="copy-btn">Copy</button></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Port Mappings -->
+        <div class="section">
+            <div class="section-header">
+                <h2>🔌 Port Mappings</h2>
+                <span>▶</span>
+            </div>
+            <div class="section-content">
+                <div class="command-block">
+                    <div class="checklist">
+                        <li>3000: Fastify web server (M1/M2)</li>
+                        <li>8554: RTSP input (cameras push here)</li>
+                        <li>8888: HLS output (browsers pull from here)</li>
+                        <li>8889: WebRTC output (low latency)</li>
+                        <li>6379: Redis cache</li>
+                        <li>9997: MediaMTX API</li>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shutdown Sequence -->
+        <div class="section">
+            <div class="section-header">
+                <h2>⏹️ Shutdown Sequence</h2>
+                <span>▶</span>
+            </div>
+            <div class="section-content">
+                <div class="command-block">
+                    <div class="checklist">
+                        <li>1. Stop FFmpeg: Press Ctrl+C in Window #3</li>
+                        <li>2. Stop Web Server: Press Ctrl+C in Window #2</li>
+                        <li>3. Stop Docker Containers:
+                            <div class="command">docker-compose down<button class="copy-btn">Copy</button></div>
+                        </li>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Common Issues -->
+        <div class="section">
+            <div class="section-header">
+                <h2>⚠️ Common Issues</h2>
+                <span>▶</span>
+            </div>
+            <div class="section-content">
+                <div class="command-block">
+                    <div class="warning">"Cannot connect to Docker daemon" = Start Docker Desktop</div>
+                    <div class="warning">"Port 3000 already in use" = Server already running</div>
+                    <div class="warning">"Stream not found" = FFmpeg not running yet</div>
+                    <div class="warning">"Container restarting" = Check logs for errors</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle sections
+        document.querySelectorAll('.section-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const section = header.parentElement;
+                section.classList.toggle('active');
+                const arrow = header.querySelector('span');
+                arrow.textContent = section.classList.contains('active') ? '▼' : '▶';
+            });
+        });
+
+        // Copy command functionality
+        document.querySelectorAll('.copy-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const command = e.target.parentElement.textContent.replace('Copy', '');
+                navigator.clipboard.writeText(command.trim());
+                
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.background = '#4338ca';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#4f46e5';
+                }, 1000);
+            });
+        });
+
+        // Initialize: open first two sections by default
+        document.querySelectorAll('.section').forEach((section, index) => {
+            if (index < 2) section.classList.add('active');
+        });
+    </script>
+</body>
+</html>
