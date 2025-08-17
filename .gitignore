@@ -1,14 +1,17 @@
-# DevProjects Main .gitignore
+# The Funky Black Box - Experimental Sandbox .gitignore
+# Filters out junk, logs, binaries to keep the repo clean
 
 # Backup folders
 backups/
 *.backup
 *.bak
+*_backup/
 
 # OS Files
 .DS_Store
 Thumbs.db
 Desktop.ini
+nul
 
 # IDE Files
 .vscode/
@@ -22,35 +25,80 @@ Desktop.ini
 .temp/
 tmp/
 
-# Logs
+# Logs and debug files
 *.log
 logs/
+debug/
+*.debug
 
 # Environment files
 .env
 .env.local
 .env.*.local
 
-# Credentials
+# Credentials and secrets
 *.key
 *.pem
 *.cert
 credentials/
+secrets/
 
-# Build outputs (will be handled per-project)
-# Uncomment if you want to ignore all build outputs globally
-# dist/
-# build/
-# out/
+# Binaries and executables
+*.exe
+*.dll
+*.so
+*.dylib
+*.bin
+*.msi
+*.dmg
+*.pkg
 
-# Dependencies (will be handled per-project)
-# Uncomment if you want to ignore all dependencies globally
-# node_modules/
-# venv/
-# env/
+# Archives and compressed files
+*.zip
+*.tar.gz
+*.rar
+*.7z
+*.tar
+
+# Build outputs
+dist/
+build/
+out/
+target/
+bin/
+obj/
+
+# Dependencies
+node_modules/
+venv/
+env/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+vendor/
 
 # AI-related
 *.ai-temp
 .ai-cache/
+
+# Experimental junk
+scratch/
+test-output/
+experiments/output/
+*.test
+*.experimental
+
+# Large media files (common in experiments)
+*.mp4
+*.avi
+*.mov
+*.wav
+*.mp3
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
 
 # Project-specific overrides can be added in individual project .gitignore files
